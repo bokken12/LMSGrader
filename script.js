@@ -39,14 +39,19 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
   console.log("LMSGrader grading view");
   var users = document.getElementsByClassName("box boxaligncenter gradingtable")[0];
   users = users.children[users.children.length - 2].children[0].children[1];
+  let toCheck = 0;
+  console.log(users.children);
   for (var i = 0; i < users.children.length; i++) {
     let child = users.children[i];
     let dateSubmitted = child.children[8].textContent;
     let dateGraded = child.children[11].textContent;
-    if(dateSubmitted !== '-'){
-      if(dateGraded === '-' || new Date(dateSubmitted) >= new Date(dateGraded)){
-        child.children[6].children[0].className = 'btn btn-warning';
-      }
+    if(dateSubmitted !== '-' && (dateGraded === '-' || new Date(dateSubmitted) >= new Date(dateGraded))){
+      child.children[6].children[0].className = 'btn btn-warning';
+      let temp = users.children[toCheck].innerHTML;
+      users.children[toCheck].innerHTML = users.children[i].innerHTML;
+      users.children[i].innerHTML = temp;
+      toCheck++;
     }
   }
+  console.log(users.children);
 }
