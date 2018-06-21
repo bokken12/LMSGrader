@@ -4,7 +4,8 @@
   "description": "Makes grading easier on LMS",
   "version": "1.0",
   "permissions": [
-    "https://lms.alphastar.academy/course/view.php?id=92"
+    "https://lms.alphastar.academy/course/view.php?id=92",
+    "https://lms.alphastar.academy/mod/assign/view.php?id=*&action=grading"
   ],
   "content_scripts" : [{
     "matches" : [ "https://lms.alphastar.academy/course/view.php?id=92", "https://lms.alphastar.academy/mod/assign/view.php?id=*&action=grading" ],
