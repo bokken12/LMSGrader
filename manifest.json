@@ -5,10 +5,11 @@
   "version": "1.0",
   "permissions": [
     "https://lms.alphastar.academy/course/view.php?id=92",
-    "https://lms.alphastar.academy/mod/assign/view.php?id=*&action=grading"
+    "https://lms.alphastar.academy/mod/assign/view.php?id=*&action=grading",
+    "https://lms.alphastar.academy/mod/assign/view.php?action=grading&id=*&page=*"
   ],
   "content_scripts" : [{
-    "matches" : [ "https://lms.alphastar.academy/course/view.php?id=92", "https://lms.alphastar.academy/mod/assign/view.php?id=*&action=grading" ],
+    "matches" : [ "https://lms.alphastar.academy/course/view.php?id=92", "https://lms.alphastar.academy/mod/assign/view.php?id=*&action=grading", "https://lms.alphastar.academy/mod/assign/view.php?action=grading&id=*&page=*" ],
     "js" : ["starter.js"]
   }],
   "web_accessible_resources": ["script.js"],
