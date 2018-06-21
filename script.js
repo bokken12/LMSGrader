@@ -37,7 +37,8 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
   }
 } else if (document.URL.startsWith('https://lms.alphastar.academy/mod/assign/view.php')){
   console.log("LMSGrader grading view");
-  var users = document.getElementsByClassName("box boxaligncenter gradingtable")[0].children[3].children[0].children[1];
+  var users = document.getElementsByClassName("box boxaligncenter gradingtable")[0];
+  users = users.children[users.children.length - 2].children[0].children[1];
   for (var i = 0; i < users.children.length; i++) {
     let child = users.children[i];
     let dateSubmitted = child.children[8].textContent;
