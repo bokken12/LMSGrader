@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "LMSGrader",
+  "description": "Makes grading easier on LMS",
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "https://lms.alphastar.academy/course/view.php?id=92"
+  ],
+  "content_scripts" : [{
+    "matches" : [ "https://lms.alphastar.academy/course/view.php?id=92" ],
+    "js" : ["starter.js"]
+  }],
+  "web_accessible_resources": ["script.js"],
+  "background": {
+    "persistent": false,
+    "scripts": ["script.js"]
+  }
+}
