@@ -4,7 +4,6 @@
   "description": "Makes grading easier on LMS",
   "version": "1.0",
   "permissions": [
-    "tabs",
     "https://lms.alphastar.academy/course/view.php?id=92"
   ],
   "content_scripts" : [{
