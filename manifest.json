@@ -8,7 +8,7 @@
     "https://lms.alphastar.academy/course/view.php?id=92"
   ],
   "content_scripts" : [{
-    "matches" : [ "https://lms.alphastar.academy/course/view.php?id=92" ],
+    "matches" : [ "https://lms.alphastar.academy/course/view.php?id=92", "https://lms.alphastar.academy/mod/assign/view.php?id=*&action=grading" ],
     "js" : ["starter.js"]
   }],
   "web_accessible_resources": ["script.js"],
