@@ -39,6 +39,16 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 	} catch (e) {
 		console.log("Not a teacher")
 	}
+} else if (document.URL.startsWith('https://lms.alphastar.academy/mod/assign/view.php') && !document.URL.includes('grading')) {
+	if(localStorage.autoOpen=="true") {
+		console.log("Auto-open ungraded submissions");
+		console.log("Type localStorage.autoOpen=false into console to disable auto opening of ungraded submissions");
+		if(document.getElementsByClassName("cell c1 lastcol")[2].innerHTML != 0) {
+			window.open(document.getElementsByClassName("btn btn-secondary")[0].href, '_blank');
+		}
+	} else {
+		console.log("Type localStorage.autoOpen=true into console to enable auto opening of ungraded submissions");
+	}
 } else if (document.URL.startsWith('https://lms.alphastar.academy/mod/assign/view.php')){
 	console.log("LMSGrader grading view");
 	var users = document.getElementsByClassName("box boxaligncenter gradingtable")[0];
@@ -56,16 +66,11 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 			toCheck++;
 		}
 	}
-	
 	if(localStorage.autoOpen=="true") {
-		console.log("Auto-open ungraded submissions");
-		console.log("Type localStorage.autoOpen=false into console to disable auto opening of ungraded submissions");
 		var links = document.getElementsByClassName("btn btn-warning");
 		for (var i = 0; i < links.length; i++) {
 			window.open(links[i].href, '_blank');
 		}
-	}
-	else {
-		console.log("Type localStorage.autoOpen=true into console to enable auto opening of ungraded submissions");
+		window.close();
 	}
 }
