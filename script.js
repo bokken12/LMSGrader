@@ -60,11 +60,9 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 	if(localStorage.autoOpen=="true") {
 		console.log("Auto-open ungraded submissions");
 		console.log("Type localStorage.autoOpen=false into console to disable auto opening of ungraded submissions");
-		var links = document.links;
+		var links = document.getElementsByClassName("btn btn-warning");
 		for (var i = 0; i < links.length; i++) {
-			if(links[i].className=='btn btn-warning') {
-				window.open(links[i].href, '_blank');
-			}
+			window.open(links[i].href, '_blank');
 		}
 	}
 	else {
