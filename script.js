@@ -39,18 +39,18 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 	} catch (e) {
 		console.log("Not a teacher")
 	}
-} else if (document.URL.startsWith('https://lms.alphastar.academy/mod/assign/view.php') && !document.URL.includes('grading')) {
+} else if (document.URL.startsWith('https://lms.alphastar.academy/mod/assign/view.php') && !document.URL.includes('grading')) {//If on assignment tab
 	if (localStorage.autoOpen == "true") {
 		console.log("Auto-open ungraded submissions");
 		console.log("Type localStorage.autoOpen=false into console to disable auto opening of ungraded submissions");
-		if (document.getElementsByClassName("cell c1 lastcol")[2].innerHTML != 0) {
-			localStorage.wasAutoOpened="true";
-			window.open(document.getElementsByClassName("btn btn-secondary")[0].href, '_blank');
+		if (document.getElementsByClassName("cell c1 lastcol")[2].innerHTML != 0) {//If there are ungraded submissions
+			localStorage.wasAutoOpened="true";//Set flag to auto-open from view all submissions tab
+			window.open(document.getElementsByClassName("btn btn-secondary")[0].href, '_blank');//open view all submissions
 		}
 	} else {
 		console.log("Type localStorage.autoOpen = true into console to enable auto opening of ungraded submissions");
 	}
-} else if (document.URL.startsWith('https://lms.alphastar.academy/mod/assign/view.php')){
+} else if (document.URL.startsWith('https://lms.alphastar.academy/mod/assign/view.php')){//If on view all submissions tab
 	console.log("LMSGrader grading view");
 	var users = document.getElementsByClassName("box boxaligncenter gradingtable")[0];
 	users = users.children[users.children.length - 2].children[0].children[1];
@@ -67,14 +67,12 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 			toCheck++;
 		}
 	}
-	if (localStorage.autoOpen == "true") {	
-		var links = document.getElementsByClassName("btn btn-warning");
-		for (var i = 0; i < links.length; i++) {
+	if (localStorage.wasAutoOpened == "true") { //If Auto Opened from Assignment tab
+		var links = document.getElementsByClassName("btn btn-warning");//Get ungraded links
+		for (var i = 0; i < links.length; i++) {//Open ungraded links
 			window.open(links[i].href, '_blank');
 		}
-		if (localStorage.wasAutoOpened == "true") {
-			localStorage.wasAutoOpened = "false";
-			window.close();
-		}
+		localStorage.wasAutoOpened = "false";//Put flag down
+		window.close();//Auto-close View all submissions tab
 	}
 }
