@@ -40,14 +40,15 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 		console.log("Not a teacher")
 	}
 } else if (document.URL.startsWith('https://lms.alphastar.academy/mod/assign/view.php') && !document.URL.includes('grading')) {
-	if(localStorage.autoOpen=="true") {
+	if (localStorage.autoOpen == "true") {
 		console.log("Auto-open ungraded submissions");
 		console.log("Type localStorage.autoOpen=false into console to disable auto opening of ungraded submissions");
-		if(document.getElementsByClassName("cell c1 lastcol")[2].innerHTML != 0) {
+		if (document.getElementsByClassName("cell c1 lastcol")[2].innerHTML != 0) {
+			localStorage.wasAutoOpened="true";
 			window.open(document.getElementsByClassName("btn btn-secondary")[0].href, '_blank');
 		}
 	} else {
-		console.log("Type localStorage.autoOpen=true into console to enable auto opening of ungraded submissions");
+		console.log("Type localStorage.autoOpen = true into console to enable auto opening of ungraded submissions");
 	}
 } else if (document.URL.startsWith('https://lms.alphastar.academy/mod/assign/view.php')){
 	console.log("LMSGrader grading view");
@@ -58,7 +59,7 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 		let child = users.children[i];
 		let dateSubmitted = child.children[8].textContent;
 		let dateGraded = child.children[11].textContent;
-		if(dateSubmitted !== '-' && (dateGraded === '-' || new Date(dateSubmitted) >= new Date(dateGraded))){
+		if (dateSubmitted !== '-' && (dateGraded === '-' || new Date(dateSubmitted) >= new Date(dateGraded))){
 			child.children[6].children[0].className = 'btn btn-warning';
 			let temp = users.children[toCheck].innerHTML;
 			users.children[toCheck].innerHTML = users.children[i].innerHTML;
@@ -66,11 +67,14 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 			toCheck++;
 		}
 	}
-	if(localStorage.autoOpen=="true") {
+	if (localStorage.autoOpen == "true") {	
 		var links = document.getElementsByClassName("btn btn-warning");
 		for (var i = 0; i < links.length; i++) {
 			window.open(links[i].href, '_blank');
 		}
-		window.close();
+		if (localStorage.wasAutoOpened == "true") {
+			localStorage.wasAutoOpened = "false";
+			window.close();
+		}
 	}
 }
