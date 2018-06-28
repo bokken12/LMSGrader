@@ -1,3 +1,17 @@
+if(!document.URL.startsWith("https://lms.alphastar.academy")) {
+//https://developer.chrome.com/extensions/getstarted
+ chrome.runtime.onInstalled.addListener(function() {
+    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+      chrome.declarativeContent.onPageChanged.addRules([{
+        conditions: [new chrome.declarativeContent.PageStateMatcher({
+          pageUrl: {}
+        })
+        ],
+            actions: [new chrome.declarativeContent.ShowPageAction()]
+      }]);
+    });
+  });
+}
 //https://stackoverflow.com/questions/247483/http-get-request-in-javascript
 var HttpClient = function() {
 	this.get = function(aUrl, aCallback) {
@@ -18,7 +32,7 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 
 	try {
 		var weeks = document.body.lastElementChild.children[1].firstElementChild.firstElementChild.firstElementChild.children[1].children[2].children[2];
-		for (var i = 0; i < weeks.children.length; i++) {
+		for (var i = 2; i < weeks.children.length; i++) {
 			var activities = weeks.children[i].children[3].children[3].children;
 			for (var j = 0; j < activities.length; j++) {
 				if(activities[j].className.startsWith('activity assign modtype_assign')){
