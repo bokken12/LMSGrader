@@ -18,8 +18,20 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 
 	try {
 		var weeks = document.body.lastElementChild.children[1].firstElementChild.firstElementChild.firstElementChild.children[1].children[2].children[2];
-		for (var i = 0; i < weeks.children.length; i++) {
-			var activities = weeks.children[i].children[3].children[3].children;
+		
+		var curInd = 0;
+		var change = -1;
+		try {
+			for(; curInd+1 < weeks.children.length && new Date(weeks.children[curInd+1].children[3].children[1].children[0].children[1].innerText)<Date.now(); curInd++) {}
+			console.log("Date found");
+		} catch (e) {
+			curInd = 0;
+			change = 1;
+			console.log("Could not find date");
+		}
+		
+		for (var i = 0; i < weeks.children.length; i++, curInd = (curInd+weeks.children.length+change)%weeks.children.length) {
+			var activities = weeks.children[curInd].children[3].children[3].children;
 			for (var j = 0; j < activities.length; j++) {
 				if(activities[j].className.startsWith('activity assign modtype_assign')){
 					let activity = activities[j].children[0].children[0].children[1].children[0].children[0];
@@ -55,6 +67,7 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 	var users = document.getElementsByClassName("box boxaligncenter gradingtable")[0];
 	users = users.children[users.children.length - 2].children[0].children[1];
 	let toCheck = 0;
+		
 	for (var i = 0; i < users.children.length; i++) {
 		let child = users.children[i];
 		let dateSubmitted = child.children[8].textContent;
