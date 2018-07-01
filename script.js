@@ -58,8 +58,7 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 		console.log("Auto-open ungraded submissions");
 		console.log("Type localStorage.autoOpen=false into console to disable auto opening of ungraded submissions");
 		if (document.getElementsByClassName("cell c1 lastcol")[2].innerHTML != 0) {//If there are ungraded submissions
-			localStorage.wasAutoOpened="true";//Set flag to auto-open from view all submissions tab
-			window.open(document.getElementsByClassName("btn btn-secondary")[0].href, '_blank');//open view all submissions
+			window.open(document.getElementsByClassName("btn btn-secondary")[0].href+"#wasAutoOpened", '_blank');//open view all submissions with flag to auto open
 		}
 	} else {
 		console.log("Type localStorage.autoOpen = true into console to enable auto opening of ungraded submissions");
@@ -81,12 +80,11 @@ if(document.URL.startsWith('https://lms.alphastar.academy/course/view.php')){
 			toCheck++;
 		}
 	}
-	if (localStorage.wasAutoOpened == "true") { //If Auto Opened from Assignment tab
+	if (window.location.href.endsWith("#wasAutoOpened")) { //If Auto Opened from Assignment tab
 		var links = document.getElementsByClassName("btn btn-warning");//Get ungraded links
 		for (var i = 0; i < links.length; i++) {//Open ungraded links
 			window.open(links[i].href, '_blank');
 		}
-		localStorage.wasAutoOpened = "false";//Put flag down
 		window.close();//Auto-close View all submissions tab
 	}
 }
